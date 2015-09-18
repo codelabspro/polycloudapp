@@ -164,6 +164,46 @@ Cloud services using Ruby on Rails
 
 '''Steps for creating this app
 
- - rails new polycloudapp
+    - $ rails new polycloudapp
 
- - bin/rails server to run the app
+    - $ bin/rails server to run the app
+
+    - Stop the app with Ctrl-C
+
+    - We're going to add rspec and capybara for testing
+        - Modify the Gemfile as follows
+
+        group :development, :test do
+          # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+          gem 'byebug'
+          gem 'rspec-rails', '~> 2.0'
+        end
+
+        group :development do
+          # Access an IRB console on exception pages or by using <%= console %> in views
+          gem 'web-console', '~> 2.0'
+
+          # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+          gem 'spring'
+        end
+
+        group :test do
+            gem 'capybara', '~> 2.1.0'
+        end
+
+        group :production do
+            gem 'pg', '0.15.1'
+            gem 'rails_12factor', '0.0.2'
+        end
+
+    - Install using bundle as follows
+      $ bundle
+
+    - Generate rspec
+      $ bin/rails generate rspec:install
+
+    - Add the following line to spec/spec_helper.rb
+    require  'capybara/rspec'
+
+    - Run the following
+     $ bundle binstubs rspec-core
