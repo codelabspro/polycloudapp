@@ -52,4 +52,42 @@ describe "Creating todo lists" do
 
     end
 
+    it "displays an error when the todolist has a description less than 3 characters" do
+        expect(Todolist.count).to eq(5)
+
+        visit "/todolists"
+        click_link "New Todolist"
+        expect(page).to have_content("New Todolist")
+
+        fill_in "Title", with: "Grocery List"
+        fill_in "Description", with: ""
+        click_button "Create Todolist"
+
+        expect(page).to have_content("error")
+        expect(Todolist.count).to eq(5)
+
+        visit "/todolists"
+        expect(page).to_not have_content("Grocery List")
+
+    end
+
+    it "displays an error when the todolist has a description less than 5 characters" do
+        expect(Todolist.count).to eq(5)
+
+        visit "/todolists"
+        click_link "New Todolist"
+        expect(page).to have_content("New Todolist")
+
+        fill_in "Title", with: "Grocery List"
+        fill_in "Description", with: "Food"
+        click_button "Create Todolist"
+
+        expect(page).to have_content("error")
+        expect(Todolist.count).to eq(5)
+
+        visit "/todolists"
+        expect(page).to_not have_content("Grocery List")
+
+    end
+
 end
