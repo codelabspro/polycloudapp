@@ -207,3 +207,8 @@ Cloud services using Ruby on Rails
 
     - Run the following
      $ bundle binstubs rspec-core
+
+
+     - bin/rails generate scaffold todolist title:string description:text
+     - bin/rake db:migrate to migrate dev database
+     - bin/rake db:migrate RAILS_ENV=test to migrate test database
